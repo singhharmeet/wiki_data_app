@@ -1,0 +1,4 @@
+db done
+using docker compose for redis creation and celery
+
+
