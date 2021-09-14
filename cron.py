@@ -2,10 +2,13 @@
 import os
 import gzip
 import shutil
+import json
 from datetime import datetime
 import urllib.request as req
 from multiprocessing import Pool
 from db.sql import MySQLDBConn
+from db.redis_cache import RedisCache
+from utils import convert_json_serialisable
 from config import DB_SETTINGS, CATEGORYWISE_MAX_DIFF_QUERY
 
 SQL_DUMP_BASE_PATH = os.getcwd()+'/sql_dumps/'
@@ -56,7 +59,9 @@ def update_cache_with_results():
             diff = int(each["link_page_id_change"])-int(each["head_page_id_change"])
             if diff> dict_results[each["cat_title"]]["diff"]:
                 dict_results[each["cat_title"]] = {"diff":int(each["link_page_id_change"])-int(each["head_page_id_change"]),"hpt":each["head_page_title"],"hpid":each["head_page_id"],"lpt":each.get("link_page_title"),"lpid":each.get("link_page_id")}
-    return dict_results
+    for k,v in dict_results.items():
+        RedisCache.rconn.set(k, json.dumps(v))
+    return True
 
 
 
@@ -93,4 +98,5 @@ if __name__ == '__main__':
     print("Updating db with newest data revision")
     #print(update_wiki_db())
     print("Updating cache with categorywise diff query")
+    update_cache_with_results()
 
