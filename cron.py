@@ -14,10 +14,10 @@ from config import DB_SETTINGS, CATEGORYWISE_MAX_DIFF_QUERY
 SQL_DUMP_BASE_PATH = os.getcwd()+'/sql_dumps/'
 
 WIKIMEDIA_LINKS = {
-#    "CATEGORY_LINKS_URL": 'https://dumps.wikimedia.org/enwiki/{0}/enwiki-{0}-categorylinks.sql.gz',
-#    "PAGE_URL": 'https://dumps.wikimedia.org/enwiki/{0}/enwiki-{0}-page.sql.gz',
+    "CATEGORY_LINKS_URL": 'https://dumps.wikimedia.org/enwiki/{0}/enwiki-{0}-categorylinks.sql.gz',
+    "PAGE_URL": 'https://dumps.wikimedia.org/enwiki/{0}/enwiki-{0}-page.sql.gz',
     "CATEGORY_URL": 'https://dumps.wikimedia.org/enwiki/{0}/enwiki-{0}-category.sql.gz',
-#    "PAGELINKS_URL": 'https://dumps.wikimedia.org/enwiki/{0}/enwiki-{0}-pagelinks.sql.gz'
+    "PAGELINKS_URL": 'https://dumps.wikimedia.org/enwiki/{0}/enwiki-{0}-pagelinks.sql.gz'
 }
 
 def unzip_gz_to_sql(path):
@@ -96,7 +96,7 @@ def update_wiki_db():
 
 if __name__ == '__main__':
     print("Updating db with newest data revision")
-    #print(update_wiki_db())
+    print(update_wiki_db())
     print("Updating cache with categorywise diff query")
     update_cache_with_results()
 
