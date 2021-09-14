@@ -24,6 +24,7 @@ This is an example repo to run cron and sql queries on wiki data dump.
   ```
 * 1 Cron job in **cron.py**, containing code to update the datbase and subsequently the cache
  * cron is executed on crontab as-> 0 5 2 * * python3 /home/ubuntu/wiki_data_app/cron.py > log.txt
+* Dockerised container for flask application
 
 ## V2(Possible Improvements)->
 * shifting server cron to airflow based cron setup for easier monitoring and maintainabity
